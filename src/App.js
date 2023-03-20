@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+// data
+import data from "./data/data.json";
+//components
+import Categories from "./components/Categories";
+import Products from "./components/Products";
 
 function App() {
+  const [product, setProduct] = useState([]);
+  const [Productfilter, setFilter] = useState("");
+  useEffect(() => {
+    setProduct(data);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="content">
+        <Categories
+          data={product}
+          Productfilter={Productfilter}
+          setFilter={setFilter}
+        />
+        <Products data={product} Productfilter={Productfilter} />
+      </div>
     </div>
   );
 }
